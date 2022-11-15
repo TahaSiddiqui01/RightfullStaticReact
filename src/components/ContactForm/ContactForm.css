@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital@1&family=Poppins:ital,wght@0,300;0,400;0,500;1,300&display=swap");
+
+.contact-form {
+  font-family: "Poppins", sans-serif;
+  padding-top: 97.5px;
+}
+
+.contact-heading {
+  margin: 0px 4px;
+  text-align: center;
+  margin-bottom: 52px;
+  font-size: 48px;
+  line-height: 67px;
+  color: #151c2d;
+  font-family: "Poppins-Semi-Bold", sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.contact-input {
+  width: 100% !important;
+  margin-top: 20px;
+}
+
+.contact-input:nth-child(3) {
+  width: 40% !important;
+}
+.form_main {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.checkboxes-child {
+  min-width: 200px;
+}
+
+.contact-input:focus{
+    border: 1px solid #01c8ee !important;
+    box-shadow: none !important;
+}
+
+@media screen and (max-width: 980px) {
+  .contact-heading {
+    font-size: 35px;
+
+    line-height: 46px;
+  }
+}
+
+.submit-button {
+  border: hidden;
+  color: #fff;
+  font-family: "Poppins-Semi-Bold", sans-serif;
+  background: linear-gradient(270deg, #01c8ee 0, #0a8bf2);
+  background-clip: padding-box;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+  height: 60px;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.16) !important;
+  text-transform: uppercase;
+  min-width: 250px;
+}
+
+
+.dropdown-basic, .dropdown-toggle{
+  width: 300px !important;
+  height: 50px !important;
+  background-color: #151c2d !important;
+  border: none;
+}
+
+.dropdown-menu.show {
+  display: block;
+  max-height: 400px;
+  overflow: auto;
+  width: 300px;
+}
+
+.form-select:focus{
+  border: 1px solid #01c8ee !important;
+  box-shadow: none !important;
+}
