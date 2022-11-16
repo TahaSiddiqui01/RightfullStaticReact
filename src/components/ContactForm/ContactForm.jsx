@@ -9,14 +9,15 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Specialties from "./SpecialtiesData";
 import Select from "react-select";
 import SpecialtiesData from "./SpecialtiesData";
-import swal from 'sweetalert';
+import swal from "sweetalert";
+import { MultiSelect } from "react-multi-select-component";
 
 const options = Specialties.map((specialties) => {
   return { value: specialties, label: specialties };
 });
 
 function ContactForm() {
-  // console.log(options, "optionsoptions");
+  const [selected, setSelected] = useState([]);
 
   const [contactData, setContactData] = useState({
     name: "",
@@ -33,11 +34,16 @@ function ContactForm() {
   });
 
   const handleOnChangeVal = (e) => {
-    console.log(e.target.name);
+    // console.log(e.target.value);
     if (e.target.name === "profile-pic") {
       setContactData({ ...contactData, profilePicture: e.target.value });
     } else if (e.target.name === "upload-resume") {
       setContactData({ ...contactData, resume: e.target.value });
+    } else if (e.target.name === "FeeSchedule") {
+      setContactData({
+        ...contactData,
+        FeeSchedule: contactData.FeeSchedule + ", " + e.target.value,
+      });
     } else {
       setContactData({ ...contactData, [e.target.name]: e.target.value });
     }
@@ -47,8 +53,11 @@ function ContactForm() {
 
   const getDataInJson = (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(contactData));
     let formData = localStorage.getItem("formData");
+    console.log(selected, 'selected')
+    setContactData(contactData["Specialties"] = [...selected]);
+
+
     if (!formData) {
       let formDataArray = [];
       formDataArray.push(contactData);
@@ -65,6 +74,11 @@ function ContactForm() {
         privacyAndPolicy: "off",
       });
     } else {
+      setContactData({
+        ...contactData,
+        Specialties: selected,
+      });
+
       let parseData = JSON.parse(formData);
       localStorage.setItem(
         "formData",
@@ -83,18 +97,10 @@ function ContactForm() {
       });
     }
 
-    // toast("Form submitted successfully", {
-    //   position: "top-right",
-    //   autoClose: 5000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "light",
-    // });
-
-    swal("Thank you for joining Rightful", "Please check your email for confirmation");
+    swal(
+      "Thank you for joining Rightful",
+      "Please check your email for confirmation"
+    );
   };
 
   return (
@@ -115,7 +121,7 @@ function ContactForm() {
       <ToastContainer />
 
       <div className="contact-form d-flex justify-content-center align-items-center flex-column">
-        <h1 className="contact-heading">Please fill out the following form</h1>
+        <h1 className="contact-heading">Create Rightful User Profile</h1>
 
         <form className="form_main">
           <div className="d-flex justify-content-between align-items-center gap-4">
@@ -232,7 +238,7 @@ function ContactForm() {
               </Dropdown> */}
 
               <h4>Specialties</h4>
-              <Form.Select
+              {/* <Form.Select
                 name="Specialties"
                 style={{ height: "62px" }}
                 onChange={handleOnChangeVal}
@@ -244,11 +250,20 @@ function ContactForm() {
                 {SpecialtiesData.map((specialty) => {
                   return <option value={specialty}>{specialty}</option>;
                 })}
-              </Form.Select>
+              </Form.Select> */}
+
+              <MultiSelect
+                name="Specialties"
+                options={options}
+                value={selected}
+                onChange={setSelected}
+                labelledBy="Select"
+              />
             </div>
 
             <div
               key={`inline-radio-7`}
+              style={{ padding: "0px 1.4rem 0px 0px" }}
               className="mb-3 my-4 w-50 checkboxes-child align-self-start"
             >
               <h4>Fees</h4>
@@ -298,7 +313,7 @@ function ContactForm() {
                   value={"400-500/h"}
                   type="radio"
                   id={`inline-radio-1`}
-                />
+                /> */}
 
                 <InputGroup className="" size="lg">
                   <Form.Control
@@ -309,17 +324,17 @@ function ContactForm() {
                     aria-label="Large"
                     aria-describedby="inputGroup-sizing-sm"
                     className="px-4 py-3 contact-input"
-                    placeholder="Other fee"
+                    placeholder="Fee"
                   />
-                </InputGroup> */}
+                </InputGroup>
               </div>
             </div>
 
             <div
-              key={`inline-radio-7`}
+              key={`inline-radio-8`}
               className="mb-3 my-4 w-50 checkboxes-child"
             >
-              <h4>Fee Schedule Tab</h4>
+              <h4>Fee Schedule</h4>
 
               <div className="d-flex justify-content-start flex-column">
                 <Form.Check
@@ -328,7 +343,7 @@ function ContactForm() {
                   label="Fixed Fees"
                   name="FeeSchedule"
                   value={"Fixed Fees"}
-                  type="radio"
+                  type="checkbox"
                   id={`inline-radio-1`}
                 />
                 <Form.Check
@@ -337,7 +352,7 @@ function ContactForm() {
                   label="Free Consultation"
                   name="FeeSchedule"
                   value={"Free Consultation"}
-                  type="radio"
+                  type="checkbox"
                   id={`inline-radio-1`}
                 />
                 <Form.Check
@@ -346,7 +361,7 @@ function ContactForm() {
                   label="No Direct Briefs"
                   name="FeeSchedule"
                   value={"No Direct Briefs"}
-                  type="radio"
+                  type="checkbox"
                   id={`inline-radio-1`}
                 />
                 <Form.Check
@@ -355,7 +370,7 @@ function ContactForm() {
                   label="Accredited Specialist"
                   name="FeeSchedule"
                   value={"Accredited Specialist"}
-                  type="radio"
+                  type="checkbox"
                   id={`inline-radio-1`}
                 />
                 <Form.Check
@@ -364,21 +379,21 @@ function ContactForm() {
                   label="Under Supervision"
                   name="FeeSchedule"
                   value={"Under Supervision"}
-                  type="radio"
+                  type="checkbox"
                   id={`inline-radio-1`}
                 />
               </div>
             </div>
           </div>
 
-          <div className="upload-file-section my-2">
-            <h4>Upload Profile Picture</h4>
-            <input
-              name="profile-pic"
-              onChange={handleOnChangeVal}
-              type={"file"}
-            />
-          </div>
+          {/* <div className="upload-file-section my-2"> */}
+          <h4>Upload Profile Picture</h4>
+          <input
+            name="profile-pic"
+            onChange={handleOnChangeVal}
+            type={"file"}
+          />
+          {/* </div> */}
 
           <div className="upload-file-section my-4">
             <h4>Upload Resume</h4>

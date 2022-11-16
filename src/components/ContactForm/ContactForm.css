@@ -86,3 +86,7 @@
   border: 1px solid #01c8ee !important;
   box-shadow: none !important;
 }
+
+.dropdown-heading {
+  height: 60px !important;
+}
