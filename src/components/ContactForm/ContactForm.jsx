@@ -54,9 +54,8 @@ function ContactForm() {
   const getDataInJson = (e) => {
     e.preventDefault();
     let formData = localStorage.getItem("formData");
-    console.log(selected, 'selected')
-    setContactData(contactData["Specialties"] = [...selected]);
-
+    console.log(selected, "selected");
+    setContactData((contactData["Specialties"] = [...selected]));
 
     if (!formData) {
       let formDataArray = [];
@@ -261,6 +260,62 @@ function ContactForm() {
               />
             </div>
 
+
+            <div
+              key={`inline-radio-8`}
+              className="mb-3 my-4 w-50 checkboxes-child"
+            >
+              <h4>Fee Schedule</h4>
+
+              <div className="d-flex justify-content-start flex-column">
+                <Form.Check
+                  onChange={handleOnChangeVal}
+                  inline
+                  label="Fixed Fees"
+                  name="FeeSchedule"
+                  value={"Fixed Fees"}
+                  type="checkbox"
+                  id={`inline-radio-1`}
+                />
+                <Form.Check
+                  onChange={handleOnChangeVal}
+                  inline
+                  label="Free Consultation"
+                  name="FeeSchedule"
+                  value={"Free Consultation"}
+                  type="checkbox"
+                  id={`inline-radio-1`}
+                />
+                <Form.Check
+                  onChange={handleOnChangeVal}
+                  inline
+                  label="No Direct Briefs"
+                  name="FeeSchedule"
+                  value={"No Direct Briefs"}
+                  type="checkbox"
+                  id={`inline-radio-1`}
+                />
+                <Form.Check
+                  onChange={handleOnChangeVal}
+                  inline
+                  label="Accredited Specialist"
+                  name="FeeSchedule"
+                  value={"Accredited Specialist"}
+                  type="checkbox"
+                  id={`inline-radio-1`}
+                />
+                <Form.Check
+                  onChange={handleOnChangeVal}
+                  inline
+                  label="Under Supervision"
+                  name="FeeSchedule"
+                  value={"Under Supervision"}
+                  type="checkbox"
+                  id={`inline-radio-1`}
+                />
+              </div>
+            </div>
+
             <div
               key={`inline-radio-7`}
               style={{ padding: "0px 1.4rem 0px 0px" }}
@@ -324,84 +379,32 @@ function ContactForm() {
                     aria-label="Large"
                     aria-describedby="inputGroup-sizing-sm"
                     className="px-4 py-3 contact-input"
-                    placeholder="Fee"
+                    placeholder={contactData.Fees === "Hourly Price" ? "Hourly" : "Daily"}
                   />
                 </InputGroup>
               </div>
             </div>
 
-            <div
-              key={`inline-radio-8`}
-              className="mb-3 my-4 w-50 checkboxes-child"
-            >
-              <h4>Fee Schedule</h4>
-
-              <div className="d-flex justify-content-start flex-column">
-                <Form.Check
-                  onChange={handleOnChangeVal}
-                  inline
-                  label="Fixed Fees"
-                  name="FeeSchedule"
-                  value={"Fixed Fees"}
-                  type="checkbox"
-                  id={`inline-radio-1`}
-                />
-                <Form.Check
-                  onChange={handleOnChangeVal}
-                  inline
-                  label="Free Consultation"
-                  name="FeeSchedule"
-                  value={"Free Consultation"}
-                  type="checkbox"
-                  id={`inline-radio-1`}
-                />
-                <Form.Check
-                  onChange={handleOnChangeVal}
-                  inline
-                  label="No Direct Briefs"
-                  name="FeeSchedule"
-                  value={"No Direct Briefs"}
-                  type="checkbox"
-                  id={`inline-radio-1`}
-                />
-                <Form.Check
-                  onChange={handleOnChangeVal}
-                  inline
-                  label="Accredited Specialist"
-                  name="FeeSchedule"
-                  value={"Accredited Specialist"}
-                  type="checkbox"
-                  id={`inline-radio-1`}
-                />
-                <Form.Check
-                  onChange={handleOnChangeVal}
-                  inline
-                  label="Under Supervision"
-                  name="FeeSchedule"
-                  value={"Under Supervision"}
-                  type="checkbox"
-                  id={`inline-radio-1`}
-                />
-              </div>
-            </div>
           </div>
 
-          {/* <div className="upload-file-section my-2"> */}
-          <h4>Upload Profile Picture</h4>
-          <input
-            name="profile-pic"
-            onChange={handleOnChangeVal}
-            type={"file"}
-          />
-          {/* </div> */}
-
-          <div className="upload-file-section my-4">
-            <h4>Upload Resume</h4>
+          <div className="d-flex  align-items-center flex-wrap my-2" style={{gap:"35px"}}>
+            <div className="">
+            <h4>Upload Profile Picture</h4>
             <input
-              name="upload-resume"
+              name="profile-pic"
               onChange={handleOnChangeVal}
               type={"file"}
             />
+            </div>
+
+            <div className="">
+              <h4>Upload Resume</h4>
+              <input
+                name="upload-resume"
+                onChange={handleOnChangeVal}
+                type={"file"}
+              />
+            </div>
           </div>
 
           <div className="my-4">
